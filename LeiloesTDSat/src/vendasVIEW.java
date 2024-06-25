@@ -14,6 +14,7 @@ public class vendasVIEW extends javax.swing.JFrame {
     public vendasVIEW() {
         initComponents();
         listarProdutos();
+        id_produto_venda.setEditable(false);// bloquear alteração indevida
     }
 
     /**
@@ -65,6 +66,11 @@ public class vendasVIEW extends javax.swing.JFrame {
                 "ID", "Nome", "Valor", "Status"
             }
         ));
+        listaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaProdutos);
 
         jLbResposta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -168,7 +174,7 @@ public class vendasVIEW extends javax.swing.JFrame {
             jLbResposta.setText(produtosdao.cancelarVenda(Integer.parseInt(id)));
             listarProdutos();
         } catch (Exception e) {
-            jLbResposta.setText("Informe somente números");
+            jLbResposta.setText("Selecione o item na lista acima");
         }
     }//GEN-LAST:event_btnVenderActionPerformed
 
@@ -180,6 +186,10 @@ public class vendasVIEW extends javax.swing.JFrame {
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         listarProdutos();
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void listaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProdutosMouseClicked
+       id_produto_venda.setText(String.valueOf(listaProdutos.getValueAt(listaProdutos.getSelectedRow(), 0))); // para captar o valor do id do item selecionado na lista
+    }//GEN-LAST:event_listaProdutosMouseClicked
 
     /**
      * @param args the command line arguments
