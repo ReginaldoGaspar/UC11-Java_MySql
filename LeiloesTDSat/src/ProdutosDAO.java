@@ -80,5 +80,41 @@ public class ProdutosDAO {
             return "Erro ao atualizar";
         }
     }
+    
+    public String cancelarVenda(int id) {
+        try {
+            conectar();
+
+            st = conn.prepareStatement("UPDATE produtos SET status = 'A Venda' WHERE produtos.id = ?");
+            st.setInt(1, id);
+            st.executeUpdate();
+            return "Atualizado com sucesso";
+        } catch (SQLException e) {
+            return "Erro ao atualizar";
+        }
+    }
+
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() {
+     try {
+            conectar();
+
+            st = conn.prepareStatement("SELECT * FROM produtos WHERE produtos.status = 'Vendido'"); // somente os Vendidos
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(rs.getInt("id"));
+                produto.setNome(rs.getString("nome"));
+                produto.setValor(rs.getDouble("valor"));
+                produto.setStatus(rs.getString("status"));
+                listagem.add(produto);
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro " + e.getMessage());
+        }
+
+        return listagem;  
+    }
 
 }
