@@ -173,6 +173,7 @@ public class vendasVIEW extends javax.swing.JFrame {
             ProdutosDAO produtosdao = new ProdutosDAO();
             jLbResposta.setText(produtosdao.cancelarVenda(Integer.parseInt(id)));
             listarProdutos();
+            id_produto_venda.setText("");
         } catch (Exception e) {
             jLbResposta.setText("Selecione o item na lista acima");
         }

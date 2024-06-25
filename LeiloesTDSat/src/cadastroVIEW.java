@@ -160,7 +160,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
             ProdutosDAO produtodao = new ProdutosDAO();
             jLbResposta.setText(produtodao.cadastrarProduto(produto));
         } catch (Exception e) {
-            jLbResposta.setText("Informe todos os dados");
+            jLbResposta.setText("Verifique os dados informados.");
         }
         
         

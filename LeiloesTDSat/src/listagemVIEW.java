@@ -159,9 +159,14 @@ public class listagemVIEW extends javax.swing.JFrame {
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
         String id = id_produto_venda.getText();
         try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            jLbResposta.setText(produtosdao.venderProduto(Integer.parseInt(id)));
-            listarProdutos();
+            if (!listaProdutos.getValueAt(listaProdutos.getSelectedRow(), 3).equals("Vendido")) {
+                ProdutosDAO produtosdao = new ProdutosDAO();
+                jLbResposta.setText(produtosdao.venderProduto(Integer.parseInt(id)));
+                listarProdutos();
+                id_produto_venda.setText("");
+            } else {
+                jLbResposta.setText("Objeto já foi vendido!!");
+            }
         } catch (Exception e) {
             jLbResposta.setText("Selecione o item na lista acima");
         }
@@ -169,7 +174,7 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        vendasVIEW vendas = new vendasVIEW(); 
+        vendasVIEW vendas = new vendasVIEW();
         vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
@@ -186,7 +191,7 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void listaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProdutosMouseClicked
-       id_produto_venda.setText(String.valueOf(listaProdutos.getValueAt(listaProdutos.getSelectedRow(), 0))); // para captar o valor do id do item selecionado na lista
+        id_produto_venda.setText(String.valueOf(listaProdutos.getValueAt(listaProdutos.getSelectedRow(), 0))); // para captar o valor do id do item selecionado na lista
     }//GEN-LAST:event_listaProdutosMouseClicked
 
     /**
