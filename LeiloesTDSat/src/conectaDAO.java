@@ -16,8 +16,7 @@ public class conectaDAO {
         try {
 
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11", "root", "elge4ds5");
-            System.out.println("conetado!");
-
+            
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
         }

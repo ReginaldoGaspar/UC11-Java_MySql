@@ -29,7 +29,7 @@ public class ProdutosDAO {
 
     }
 
-    public void cadastrarProduto(ProdutosDTO produto) {
+    public String cadastrarProduto(ProdutosDTO produto) {
         try {
             conectar();
             st = conn.prepareStatement("INSERT INTO produtos VALUES(?,?,?,?)");
@@ -38,10 +38,11 @@ public class ProdutosDAO {
             st.setDouble(3, produto.getValor());
             st.setString(4, produto.getStatus());
             st.executeUpdate();
+            return "Salvo com sucesso";
         } catch (SQLException ex) {
-
+            return "Erro ao salvar";
         }
-        
+
     }
 
     public ArrayList<ProdutosDTO> listarProdutos() {
@@ -63,9 +64,21 @@ public class ProdutosDAO {
         } catch (Exception e) {
             System.out.println("erro " + e.getMessage());
         }
-       
+
         return listagem;
-        
+    }
+
+    public String venderProduto(int id) {
+        try {
+            conectar();
+
+            st = conn.prepareStatement("UPDATE produtos SET status = 'Vendido' WHERE produtos.id = ?");
+            st.setInt(1, id);
+            st.executeUpdate();
+            return "Atualizado com sucesso";
+        } catch (SQLException e) {
+            return "Erro ao atualizar";
+        }
     }
 
 }
